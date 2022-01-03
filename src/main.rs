@@ -79,6 +79,22 @@ fn sximm(op: u16, b: u16) -> u16 {
     }
 }
 
+struct Cpu {
+    r: [u16; 8],
+    rpc: u16,
+    rcnd: u16,
+}
+
+impl Cpu {
+    fn new(base: u16) -> Self {
+        Cpu { 
+            r: [0; 8], 
+            rpc: base, 
+            rcnd: 0 
+        }
+    }
+}
+
 struct VM {
     // VM memory
     memory: [u16; MEM_SIZE], 
@@ -363,22 +379,6 @@ impl VM {
     fn mem_read(&self, address: u16) -> u16 {
         self.memory[address as usize]
     }
-}
-
-impl Cpu {
-    fn new(base: u16) -> Self {
-        Cpu { 
-            r: [0; 8], 
-            rpc: base, 
-            rcnd: 0 
-        }
-    }
-}
-
-struct Cpu {
-    r: [u16; 8],
-    rpc: u16,
-    rcnd: u16,
 }
 
 fn main() {
